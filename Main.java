@@ -74,6 +74,31 @@ public class Main {
         return l;
         }
 
+    static <E extends Comparable<? super E>>
+    void mergeSort(E[] A, E[] temp, int l, int r) {
+       int mid = (l + r) / 2;
+         if (l == r) return;
+         mergeSort(A, temp, l, mid);
+         mergeSort(A, temp, mid + 1, r);
+         for(int i = l; i <= r; i++) {
+             temp[i] = A[i];
+             int i1 = l;
+             int i2 = mid + 1;
+             for (int curr = l; curr <= r; curr++) {
+                 if (i1 == mid + 1)
+                     A[curr] = temp[i2++];
+                  else if (i2 > r) {
+                     A[curr] = temp[i1++];
+                 } else if (temp[i1].compareTo(temp[i2]) < 0) {
+                     A[curr] = temp[i1++];
+                 } else {
+                     A[curr] = temp[i2++];
+                 }
+             }
+         }
+   }
+
+
 
     public static void main(String[] args) {
         System.out.print("Selection Sort: ");
@@ -102,6 +127,14 @@ public class Main {
         quickSort(D, 0, D.length - 1);
         for (int i = 0; i < D.length; i++) {
             System.out.println(D[i]);
+        }
+
+        Integer[] E = { 5, 3, 2, 1, 4};
+        Integer[] temp = new Integer[E.length];
+        System.out.print("MergeSort: ");
+        mergeSort(E, temp, 0, E.length - 1);
+        for (int i = 0; i < E.length; i++) {
+            System.out.println(E[i]);
         }
     }
 }
