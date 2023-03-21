@@ -1,3 +1,4 @@
+
 public class Main {
    static <E> void swap(E[] A, int i, int j) {
         E temp = A[i];
@@ -49,6 +50,30 @@ public class Main {
         }
     }
 
+    static <E extends Comparable<? super E>>
+    void quickSort(E[] A, int i, int j) {
+       int pivotIndex = (i + j) / 2;
+       swap(A, pivotIndex, j);
+         int k = partition(A, i - 1, j, A[j]);
+            swap(A, k, j);
+            if ((k - i) > 1) {
+                quickSort(A, i, k - 1);
+            }
+            if ((j - k) > 1) {
+                quickSort(A, k + 1, j);
+            }
+    }
+
+    private static <E extends Comparable<? super E>> int partition(E[] A, int l, int r, E pivot) {
+        do {
+            while (A[++l].compareTo(pivot) < 0);
+            while ((r != 0) && (A[--r].compareTo(pivot) > 0));
+            swap(A, l, r);
+        } while (l < r);
+        swap(A, l, r);
+        return l;
+        }
+
 
     public static void main(String[] args) {
         System.out.print("Selection Sort: ");
@@ -70,6 +95,13 @@ public class Main {
         shellSort(C);
         for (int i = 0; i < C.length; i++) {
             System.out.println(C[i]);
+        }
+
+        Integer[] D = { 5, 3, 2, 1, 4};
+        System.out.print("QuickSort: ");
+        quickSort(D, 0, D.length - 1);
+        for (int i = 0; i < D.length; i++) {
+            System.out.println(D[i]);
         }
     }
 }
