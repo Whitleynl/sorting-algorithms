@@ -1,6 +1,18 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
+
+    public static Integer[] createList(int size) {
+        Random rand = new Random();
+        Integer[] array = new Integer[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = rand.nextInt(100);
+        }
+        return array;
+    }
+
+
    static <E> void swap(E[] A, int i, int j) {
         E temp = A[i];
         A[i] = A[j];
@@ -102,35 +114,48 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Integer[] A = { 5, 3, 2, 1, 4};
+
+        Integer[] unsorted = createList(100000);
+        System.out.println("List Size: " + unsorted.length);
+        System.out.println(" ");
+
+        Integer[] A = Arrays.copyOf(unsorted, unsorted.length);
+        long selectStartTime = System.nanoTime();
         selectionSort(A);
-        for (int i = 0; i < A.length; i++) {
-            System.out.println(A[i]);
-        }
+        long selectEndTime = System.nanoTime();
+        System.out.println("Selection Sort Time: " + ((selectEndTime - selectStartTime) / 1000000) + " milliseconds");
+        System.out.println("Selection Sort Time: " + ((selectEndTime - selectStartTime) / 1000) + " microseconds\n");
 
-        Integer[] B = { 5, 3, 2, 1, 4};
+
+
+        Integer[] B = Arrays.copyOf(unsorted, unsorted.length);
+        long insertStartTime = System.nanoTime();
         insertionSort(B);
-        for (int i = 0; i < B.length; i++) {
-            System.out.println(B[i]);
-        }
+        long insertEndTime = System.nanoTime();
+        System.out.println("Insertion Sort Time: " + ((insertEndTime - insertStartTime) / 1000000) + " milliseconds");
+        System.out.println("Insertion Sort Time: " + ((insertEndTime - insertStartTime) / 1000) + " microseconds\n");
 
-        Integer[] C = { 5, 3, 2, 1, 4};
+        Integer[] C = Arrays.copyOf(unsorted, unsorted.length);
+        long shellStartTime = System.nanoTime();
         shellSort(C);
-        for (int i = 0; i < C.length; i++) {
-            System.out.println(C[i]);
-        }
+        long shellEndTime = System.nanoTime();
+        System.out.println("Shell Sort Time: " + ((shellEndTime - shellStartTime) / 1000000) + " milliseconds");
+        System.out.println("Shell Sort Time: " + ((shellEndTime - shellStartTime) / 1000) + " microseconds\n");
 
-        Integer[] D = { 5, 3, 2, 1, 4};
+        Integer[] D = Arrays.copyOf(unsorted, unsorted.length);
+        long quickStartTime = System.nanoTime();
         quickSort(D, 0, D.length - 1);
-        for (int i = 0; i < D.length; i++) {
-            System.out.println(D[i]);
-        }
+        long quickEndTime = System.nanoTime();
+        System.out.println("Quick Sort Time: " + ((quickEndTime - quickStartTime) / 1000000) + " milliseconds");
+        System.out.println("Quick Sort Time: " + ((quickEndTime - quickStartTime) / 1000) + " microseconds\n");
 
-        Integer[] E = { 5, 3, 2, 1, 4};
+
+        Integer[] E = Arrays.copyOf(unsorted, unsorted.length);
         Integer[] temp = Arrays.copyOf(E, E.length);
+        long mergeStartTime = System.nanoTime();
         mergeSort(E, temp, 0, E.length - 1);
-        for (int i = 0; i < E.length; i++) {
-            System.out.println(E[i]);
-        }
+        long mergeEndTime = System.nanoTime();
+        System.out.println("Merge Sort Time: " + ((mergeEndTime - mergeStartTime) / 1000000) + " milliseconds");
+        System.out.println("Merge Sort Time: " + ((mergeEndTime - mergeStartTime) / 1000) + " microseconds\n");
     }
 }
