@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Main {
    static <E> void swap(E[] A, int i, int j) {
@@ -82,6 +83,7 @@ public class Main {
          mergeSort(A, temp, mid + 1, r);
          for(int i = l; i <= r; i++) {
              temp[i] = A[i];
+         }
              int i1 = l;
              int i2 = mid + 1;
              for (int curr = l; curr <= r; curr++) {
@@ -96,12 +98,10 @@ public class Main {
                  }
              }
          }
-   }
 
 
 
     public static void main(String[] args) {
-        System.out.print("Selection Sort: ");
         Integer[] A = { 5, 3, 2, 1, 4};
         selectionSort(A);
         for (int i = 0; i < A.length; i++) {
@@ -109,29 +109,25 @@ public class Main {
         }
 
         Integer[] B = { 5, 3, 2, 1, 4};
-        System.out.print("Insertion Sort: ");
         insertionSort(B);
         for (int i = 0; i < B.length; i++) {
             System.out.println(B[i]);
         }
 
         Integer[] C = { 5, 3, 2, 1, 4};
-        System.out.print("ShellSort: ");
         shellSort(C);
         for (int i = 0; i < C.length; i++) {
             System.out.println(C[i]);
         }
 
         Integer[] D = { 5, 3, 2, 1, 4};
-        System.out.print("QuickSort: ");
         quickSort(D, 0, D.length - 1);
         for (int i = 0; i < D.length; i++) {
             System.out.println(D[i]);
         }
 
         Integer[] E = { 5, 3, 2, 1, 4};
-        Integer[] temp = new Integer[E.length];
-        System.out.print("MergeSort: ");
+        Integer[] temp = Arrays.copyOf(E, E.length);
         mergeSort(E, temp, 0, E.length - 1);
         for (int i = 0; i < E.length; i++) {
             System.out.println(E[i]);
